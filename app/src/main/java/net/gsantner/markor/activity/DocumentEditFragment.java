@@ -727,17 +727,18 @@ public class DocumentEditFragment extends GsFragmentBase implements TextFormat.T
         dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), NewFileDialog.FRAGMENT_TAG);
         return true;
     }
-
     /**
      * This method ask user to save the document in this fragment before going to a new fragment.
-     * Although onPause() will save the contents automatically, it is better for user to know it because
-     * if the user save this document as a new document, the content transferred from
-     * this document should include or should not include the unsaved content changes,
-     * which should be decided by the user.
+     * Although onPause() will save the contents automatically, it is better for user to know it.
+     * This is because
+     * when the user save this document as a new document, whether the content transferred from
+     * this document includes the unsaved changes or not should be decided by the user.
+     * @return the built dialog, produced for the caller to show() it later.
      */
     private AlertDialog getDialogToHintUserToSaveFileBeforeOpenNew() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(R.string.save_as);
+        builder.setTitle(R.string.save);
+        builder.setIcon(R.drawable.ic_save_black_24dp);
         builder.setMessage(R.string.hint_current_file_has_changed);
         builder.setPositiveButton(R.string.hint_current_file_has_changed_yes, (dialog, which) -> {
             dialog.dismiss();
